@@ -1,0 +1,5 @@
+print()
+print('2026年1-6月广东主要统计指标')
+print('地区生产总值（GDP）：', gdp, '亿元')
+print('比上年增长：', gdp_growth, '%')
+print('换算一下：', round(gdp / 10000, 2), '万亿元')
