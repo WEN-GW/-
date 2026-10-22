@@ -1,0 +1,38 @@
+# import requests
+
+# url = "http://127.0.0.1:8000/"
+# resp = requests.get(url, timeout=10)          # 去取，最多等 10 秒
+
+# print("对方回的暗号：", resp.status_code)      # 200 = 成功
+# print("对方给了多少字：", len(resp.text))       # 数一下正文长度
+# print(resp.text[:300])                        # 只看前 300 个字
+
+
+# import requests
+# from parsel import Selector
+
+# resp = requests.get("http://127.0.0.1:8000/", timeout=10)   # ① 拿
+# sel = Selector(text=resp.text)                              # ② 装：变成能查的结构
+
+# name = sel.css("a.title::text").get()                       # ③ 取：找 a.title → 只要文字 → 取第一个
+# print(name)
+
+
+import requests
+from parsel import Selector
+ 
+resp = requests.get("http://127.0.0.1:8000/", timeout=10)
+sel = Selector(text=resp.text)
+ 
+cards = sel.css("li.book-item")
+# li.book-item = 每一本书外面那个"盒子"
+# 不加 .get()，拿到的是一堆盒子本身（不是一个结果）
+ 
+print("这一页一共", len(cards), "本书")
+print("-" * 30)
+ 
+for card in cards:
+    # 下面两行都在「某一个盒子内部」找，所以前面不加 sel. 而写 card.
+    name = card.css("a.title::text").get()
+    downloads = card.css("span.downloads::text").get()
+    print(name, "|", downloads)

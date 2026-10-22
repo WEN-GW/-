@@ -1,0 +1,4 @@
+url = 'https://www.macroview.club/region/guangdong/gdp'
+
+resp = open(url)
+print(resp.read())

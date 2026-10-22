@@ -1,0 +1,24 @@
+import requests   #导入requests库 
+
+url = 'https://quotes.toscrape.com/'   #要爬取的网页链接
+
+# HEADERS = {
+#     "User-Agent": (
+#         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+#         "(KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+#     )
+# }
+# HEADERS = {'user-agent': Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36}
+# 防止拒绝访问
+
+resp = requests.get(url, timeout=10)  #发送请求
+
+print(resp.status_code)  #打印响应状态码    
+
+print(len(resp.content))   #打印响应内容长度
+
+print(resp.text[:300])
+
+with open('GDSGDP.txt','w',encoding='utf-8') as f:
+    f.write(resp.text)
+#将响应内容写入文件 GDSGDP.txt
